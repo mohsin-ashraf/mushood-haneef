@@ -79,13 +79,13 @@ with open("greatnorthpropertyauction "+location+".csv","w",newline='') as output
         print (locations)
         postals = tree.cssselect('span.properties-preview-content-details-address.details-address-postcode')
         postals = [postal.text_content() for postal in postals]
-        location_number = 1
+        location_counter = 1
         for location,postal in zip(locations,postals):
             link = get_zoopla_url(location,postal)
             zoopla_html = requests.get(link).text
             property_price = get_zoopla_home_values(zoopla_html)
             property_values.append(property_price)
-            print ("Location number "+str(location_number)+" out of "+str(len(locations)))
+            print ("Location number "+str(location_counter)+" out of "+str(len(locations)))
             location_counter+=1
             urls_to_homes = get_all_homes_url(zoopla_html)
             for sub_link_no , sub_link in enumerate(urls_to_homes):
