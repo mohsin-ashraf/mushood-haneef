@@ -1,6 +1,7 @@
 import requests
 import lxml.html
 import time
+from docx import Document
 from selenium import webdriver
 import os
 
@@ -52,14 +53,15 @@ print ("Total Topics found: "+str(len(links_href)))
 def get_medium_pages(links_href, titles):
     for i, link in enumerate(links_href):
         print ("Scrapping: "+ str(i+1)+" of "+str(len(links_href)))
-        with open("Medium/"+search_query+"/"+search_query + str(1 + i) + '.txt', 'w', encoding="utf-8") as outputfile:
-            try:
-                sub_tree = lxml.html.fromstring(requests.get(link).text)
-            except:
-                print ("Url: "+link+" was unable to open")
-            content = sub_tree.cssselect('div.section-content')[0].text_content()
-            outputfile.write(content)
-            outputfile.close()
+        outputfile = Document()
+        try:
+            sub_tree = lxml.html.fromstring(requests.get(link).text)
+        except:
+            print ("Url: "+link+" was unable to open")
+        content = sub_tree.cssselect('div.section-content')[0].text_content()
+        outputfile.add_paragraph(content)
+        outputfile.save("Medium/"+search_query+"/"+search_query+" "+str(i+1)+".docx")
 
 
 get_medium_pages(links_href, titles)
+print ("Process completed")
