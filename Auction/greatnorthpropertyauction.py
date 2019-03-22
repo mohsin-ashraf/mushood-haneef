@@ -6,7 +6,7 @@ import requests
 import csv
 
 location = input("Please enter the location: ")
-location = "Nottinghamshire"
+#location = "Nottinghamshire"
 driver = webdriver.Chrome(os.getcwd()+"/chromedriver")
 driver.maximize_window()
 driver.implicitly_wait(50)
