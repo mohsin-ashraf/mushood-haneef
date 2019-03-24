@@ -62,17 +62,26 @@ def get_range_and_confidence(html):
 
 with open("iamsold"+location+".csv","w",newline='') as outputfile:
     csv_file = csv.writer(outputfile)
-    csv_file.writerow(["Price","Location","Postal Code","Perperty Value","Low Range","High Range","Confidence"])
+    csv_file.writerow(["Auction Link","Time Left","Price","Location","Postal Code","Perperty Value","Low Range","High Range","Confidence"])
     for i in range(PAGES_COUNTS):
         source = driver.page_source
         es_ranges = []
         confidences = []
         property_values = []
+        end_time_auction = []
         tree = lxml.html.fromstring(source)
         prices = tree.cssselect("span.properties-preview-content-price-figure")
         prices = [price.text_content() for price in prices]
         addresses = tree.cssselect('div.properties-preview-content-details')
         addresses = [address.text_content() for address in addresses]
+        links_to_homes = tree.cssselect('div.properties-preview-position div.properties-preview > a')
+        links_to_homes = ["https://www.iamsold.co.uk"+link.attrib['href'] for link in links_to_homes]
+        for j,link in enumerate(links_to_homes):            
+            print ("Auction time from home number: "+str(i+1))
+            sub_tree = lxml.html.fromstring(requests.get(link).text)
+            auction_time = sub_tree.cssselect('span.end_time_auto_time.stat-value.stat-value--large')[0].text_content()
+            end_time_auction.append(auction_time)
+            print (auction_time)
         locations = [address.split(',')[0] + ", "+ address.split(',')[1] for address in addresses]
         postals = tree.cssselect('span.properties-preview-content-details-address.details-address-postcode')
         postals = [postal.text_content() for postal in postals]
@@ -96,9 +105,10 @@ with open("iamsold"+location+".csv","w",newline='') as outputfile:
                 es_ranges.append(es_range)
                 confidences.append(confi)
         inner_counter = 0
-        for price,loc,pos in zip(prices,locations,postals):
+        for end_time,link_to_auction,price,loc,pos in zip(end_time_auction,links_to_homes,prices,locations,postals):
+            print (loc)
             for p_value,es_range,confi in zip(property_values[inner_counter],es_ranges,confidences):
-                csv_file.writerow([price,loc,pos,p_value,es_range[0],es_range[1],confi])
+                csv_file.writerow([link_to_auction,end_time,price,loc,pos,p_value,es_range[0],es_range[1],confi])
             inner_counter+=1
 
         try:
