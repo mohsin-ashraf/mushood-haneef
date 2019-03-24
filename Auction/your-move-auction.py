@@ -64,7 +64,7 @@ def get_range_and_confidence(html):
 
 with open("your-move-auction "+location+".csv","w",newline='') as outputfile:
     csv_file = csv.writer(outputfile)
-    csv_file.writerow(["Price","Location","Postal Code","Perperty Value","Low Range","High Range","Confidence"])
+    csv_file.writerow(["Auction Link","Time Left","Price","Location","Postal Code","Perperty Value","Low Range","High Range","Confidence"])
     for i in range(PAGES_COUNTS):
         source = driver.page_source
         es_ranges = []
@@ -76,6 +76,17 @@ with open("your-move-auction "+location+".csv","w",newline='') as outputfile:
         addresses = tree.cssselect('div.properties-preview-content-details')
         addresses = [address.text_content() for address in addresses]
         addresses = [address.split(',') for address in addresses]
+        links_to_homes = tree.cssselect('div.properties-preview-position div.properties-preview > a')
+        links_to_homes = ["https://www.iamsold.co.uk"+link.attrib['href'] for link in links_to_homes]
+        for j,link in enumerate(links_to_homes):            
+            print ("Auction time from home number: "+str(j+1))
+            sub_tree = lxml.html.fromstring(requests.get(link).text)
+            try:
+                auction_time = sub_tree.cssselect('span.end_time_auto_time.stat-value.stat-value--large')[0].text_content()
+            except:
+                auction_time = "No information available for time."
+            end_time_auction.append(auction_time)
+            print (auction_time)
         for i in range(len(addresses)):
             addresses[i] = [x.strip() for x in addresses[i]]
             print (addresses[i])
@@ -103,10 +114,11 @@ with open("your-move-auction "+location+".csv","w",newline='') as outputfile:
                 es_ranges.append(es_range)
                 confidences.append(confi)
         inner_counter = 0
-        for price,loc,pos in zip(prices,locations,postals):
-            for p_value,es_range,confi in zip(property_values[inner_counter],es_ranges,confidences):
-                csv_file.writerow([price,loc,pos,p_value,es_range[0],es_range[1],confi])
-            inner_counter+=1
+        for end_time,link_to_auction,price,loc,pos in zip(end_time_auction,links_to_homes,prices,locations,postals):
+                print (loc)
+                for p_value,es_range,confi in zip(property_values[inner_counter],es_ranges,confidences):
+                    csv_file.writerow([link_to_auction,end_time,price,loc,pos,p_value,es_range[0],es_range[1],confi])
+                inner_counter+=1
         try:
             driver.execute_script('document.querySelectorAll("div#pagination-count a")['+str(i)+'].click()')
             print ("Next page: "+str(i+1))
