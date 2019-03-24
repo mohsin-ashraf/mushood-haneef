@@ -77,9 +77,12 @@ with open("iamsold"+location+".csv","w",newline='') as outputfile:
         links_to_homes = tree.cssselect('div.properties-preview-position div.properties-preview > a')
         links_to_homes = ["https://www.iamsold.co.uk"+link.attrib['href'] for link in links_to_homes]
         for j,link in enumerate(links_to_homes):            
-            print ("Auction time from home number: "+str(j+1))
+            print ("Auction time from home number: "+str(i+1))
             sub_tree = lxml.html.fromstring(requests.get(link).text)
-            auction_time = sub_tree.cssselect('span.end_time_auto_time.stat-value.stat-value--large')[0].text_content()
+            try:
+                auction_time = sub_tree.cssselect('span.end_time_auto_time.stat-value.stat-value--large')[0].text_content()
+            except:
+                auction_time = "No information available for time."
             end_time_auction.append(auction_time)
             print (auction_time)
         locations = [address.split(',')[0] + ", "+ address.split(',')[1] for address in addresses]
