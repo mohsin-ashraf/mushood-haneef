@@ -4,6 +4,8 @@ import time
 import os
 import requests
 import csv
+from selenium.webdriver.support.ui import Select
+
 
 location = input("Please enter the location: ")
 location = "Nottinghamshire"
@@ -18,7 +20,13 @@ url = "https://www.sdlauctions.co.uk/"
 
 driver.get(url)
 driver.execute_script("window.scrollTo(0,-1000)")
+
 driver.find_element_by_name("location").send_keys(location)
+select = Select(driver.find_element_by_id('radius'))
+select.select_by_visible_text('40 miles')
+select = Select(driver.find_element_by_id('auction'))
+select.select_by_visible_text('Online')
+
 driver.find_element_by_id('searchProperty').click()
 driver.execute_script('window.scrollTo(0,10000000000)')
 all_selector = "body > section > div:nth-child(2) > div.search-header > div.column.medium-6.medium-text-right.search-filter-options > div > ul:nth-child(1) > li:nth-child(6) > a"
