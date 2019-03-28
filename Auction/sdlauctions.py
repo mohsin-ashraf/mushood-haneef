@@ -24,16 +24,17 @@ driver.execute_script("window.scrollTo(0,-1000)")
 driver.find_element_by_name("location").send_keys(location)
 select = Select(driver.find_element_by_id('radius'))
 select.select_by_visible_text('40 miles')
-select = Select(driver.find_element_by_id('auction'))
-select.select_by_visible_text('Online')
 
 driver.find_element_by_id('searchProperty').click()
 driver.execute_script('window.scrollTo(0,10000000000)')
 all_selector = "body > section > div:nth-child(2) > div.search-header > div.column.medium-6.medium-text-right.search-filter-options > div > ul:nth-child(1) > li:nth-child(6) > a"
 print("Waiting to load all the data at once")
-time.sleep(5)
+time.sleep(2)
 driver.execute_script("document.querySelector('"+all_selector+"').click()")
 
+time.sleep(5)
+select = Select(driver.find_element_by_id('auction'))
+select.select_by_visible_text('Online')
 
 
 #############                   ZOOPLA FUNCTIONS ######################
@@ -92,14 +93,40 @@ def get_locations_postal_codes(addresses):
 
 with open("sdlauctions " + location + ".csv","w",newline="") as outputfile:
     csv_file = csv.writer(outputfile)
-    csv_file.writerow(["Price","Location","Postal Code","Perperty Value","Low Range","High Range","Confidence"])
+    csv_file.writerow(["Link To Home","End Auction Time","Price","Location","Postal Code","Perperty Value","Low Range","High Range","Confidence"])
     html = driver.page_source
+    auction_end_time = []
+    es_ranges = []
+    confidences = []
     tree = lxml.html.fromstring(html)
     property_desc = tree.cssselect('div.property-tile div.property-desc')
     addresses = [p.cssselect("p")[len(p.cssselect('p'))-1].text_content() for p in property_desc]
+    property_values = []
     prices = [price.text_content() for price in tree.cssselect('div.property-tile div.property-price span')]
     locations,postals = get_locations_postal_codes(addresses)
     location_counter = 1
+    links_to_homes = tree.cssselect("div.property-tile.past-property")
+    links_to_homes = [home.cssselect('div > a') for home in links_to_homes]
+    links_to_homes = [link[0] for link in links_to_homes]
+    print ("Total Homes Found: "+str(len(links_to_homes)))
+    links_to_homes = [link.attrib['href'] for link in links_to_homes]
+    sub_driver = webdriver.Chrome('chromedriver')
+    for home_number,sub_link in enumerate(links_to_homes):
+        print ("Home number "+str(home_number+1)+" out of "+str(len(links_to_homes)))
+        try:
+            sub_driver.get(sub_link)
+            time.sleep(2)# This time sleep is for loading acution time Since it is rendered from the server its speed depends upon internet you can change this time to 1 or you can complelty remove it.
+            sub_tree = lxml.html.fromstring(sub_driver.page_source)
+        except:
+            print ("Error: Page not found")
+        try:
+            end_time = sub_tree.xpath('//*[@id="bidding-panel"]/div[4]/div[1]/div[2]')[0].text_content().strip()
+            #print (end_time)
+            auction_end_time.append(end_time)
+        except:
+            print ("End time not available")
+            auction_end_time.append("End Time not Available")
+    sub_driver.quit()
     for location,postal in zip(locations,postals):
         link = get_zoopla_url(location,postal)
         zoopla_html = requests.get(link).text
@@ -114,14 +141,15 @@ with open("sdlauctions " + location + ".csv","w",newline="") as outputfile:
             if get_range_and_confidence(sub_html) != None:
                 es_range,confi = get_range_and_confidence(sub_html)
             else:
+                print ("Unable to  find the range")
                 es_range = ["None","None"]
                 confi = "None"
             es_ranges.append(es_range)
             confidences.append(confi)
         inner_counter = 0
-        for price,loc,pos in zip(prices,locations,postals):
+        for link,ac_end,price,loc,pos in zip(links_to_homes,auction_end_time,prices,locations,postals):
             for p_value,es_range,confi in zip(property_values[inner_counter],es_ranges,confidences):
-                csv_file.writerow([price,loc,pos,p_value,es_range[0],es_range[1],confi])
+                csv_file.writerow([link,ac_end,price,loc,pos,p_value,es_range[0],es_range[1],confi])
             inner_counter+=1
 
 print ("Process completed")
