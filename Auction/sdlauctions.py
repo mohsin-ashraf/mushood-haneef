@@ -112,6 +112,8 @@ with open("sdlauctions " + location + ".csv","w",newline="") as outputfile:
     links_to_homes = [link.attrib['href'] for link in links_to_homes]
     sub_driver = webdriver.Chrome('chromedriver')
     for home_number,sub_link in enumerate(links_to_homes):
+        if home_number == 50:
+            break
         print ("Home number "+str(home_number+1)+" out of "+str(len(links_to_homes)))
         try:
             sub_driver.get(sub_link)
@@ -146,11 +148,11 @@ with open("sdlauctions " + location + ".csv","w",newline="") as outputfile:
                 confi = "None"
             es_ranges.append(es_range)
             confidences.append(confi)
-        inner_counter = 0
-        for link,ac_end,price,loc,pos in zip(links_to_homes,auction_end_time,prices,locations,postals):
-            for p_value,es_range,confi in zip(property_values[inner_counter],es_ranges,confidences):
-                csv_file.writerow([link,ac_end,price,loc,pos,p_value,es_range[0],es_range[1],confi])
-            inner_counter+=1
+    inner_counter = 0
+    for link,ac_end,price,loc,pos in zip(links_to_homes,auction_end_time,prices,locations,postals):
+        for p_value,es_range,confi in zip(property_values[inner_counter],es_ranges,confidences):
+            csv_file.writerow([link,ac_end,price,loc,pos,p_value,es_range[0],es_range[1],confi])
+        inner_counter+=1
 
 print ("Process completed")
 outputfile.close()
