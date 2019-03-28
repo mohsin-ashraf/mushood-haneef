@@ -112,8 +112,6 @@ with open("sdlauctions " + location + ".csv","w",newline="") as outputfile:
     links_to_homes = [link.attrib['href'] for link in links_to_homes]
     sub_driver = webdriver.Chrome('chromedriver')
     for home_number,sub_link in enumerate(links_to_homes):
-        if home_number == 50:
-            break
         print ("Home number "+str(home_number+1)+" out of "+str(len(links_to_homes)))
         try:
             sub_driver.get(sub_link)
