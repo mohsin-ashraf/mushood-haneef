@@ -64,6 +64,7 @@ with open("greatnorthpropertyauction "+location+".csv","w",newline='') as output
     for i in range(PAGES_COUNTS):
         source = driver.page_source
         es_ranges = []
+        end_time_auction = []
         confidences = []
         property_values = []
         tree = lxml.html.fromstring(source)

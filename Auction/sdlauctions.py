@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import Select
 
 
 location = input("Please enter the location: ")
-location = "Nottinghamshire"
+#location = "Nottinghamshire"
 driver = webdriver.Chrome(os.getcwd()+"/chromedriver")
 driver.maximize_window()
 driver.implicitly_wait(60)
