@@ -1,0 +1,101 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const EmployeeSchema = new Schema({
+  name:{
+    type:String,
+    required:true
+  },
+  code:{
+    type:Number,
+    require:true
+  },
+  jobTitle:{
+    type:String,
+    required:true
+  },
+  joiningDate:{
+    type:Date,
+    default:Date.now()
+  },
+  reviews:{
+    id:mongoose.Schema.Types.ObjectId,
+    reviewer:{
+      type:String,
+      required:true
+    },
+    template:{
+      type:String,
+      required:true
+    },
+    status:{
+      type:String,
+      required:true
+    },
+    reviewDate:{
+      type:Date,
+      default:Date.now()
+    },
+    dueOn:{
+      type:String,
+      default:Date.now()
+    },
+    start:{
+      type:Date,
+      default:Date.now()
+    },
+    end:{
+      type:Date,
+      default:Date.now()
+    },
+    default:null
+  },
+  courseSelected:{
+    trainingType:{
+      trainingType:String,
+      required:true
+    },
+    courseName:{
+      type:String,
+      required:true
+    },
+    paymentType:{
+      type:String,
+      required:true
+    },
+    default:null
+  },
+  trainingSessions:{
+    id:mongoose.Schema.Types.ObjectId,
+    schedualedTime:{
+      type:Date,
+      requried:true
+    },
+    status:{
+      type:String,
+      required:true,
+    },
+    deliveryMethod:{
+      type:String,
+      required:true
+    },
+    deliveryLocation:{
+      type:String,
+      required:true
+    },
+    attendanceType:{
+      type:String,
+      required:true
+    },
+    TCRequired:{
+      type:String,
+      required:true
+    }
+  },
+  default:null
+});
+
+module.exports = Employee = mongoose.model("employee",EmployeeSchema);
+addEmployee = function(newEmployee,callback){
+  newEmployee.save(callback);
+}
