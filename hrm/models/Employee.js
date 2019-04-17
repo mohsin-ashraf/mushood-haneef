@@ -17,85 +17,25 @@ const EmployeeSchema = new Schema({
   joiningDate:{
     type:Date,
     default:Date.now()
-  },
-  reviews:{
-    id:mongoose.Schema.Types.ObjectId,
-    reviewer:{
-      type:String,
-      required:true
-    },
-    template:{
-      type:String,
-      required:true
-    },
-    status:{
-      type:String,
-      required:true
-    },
-    reviewDate:{
-      type:Date,
-      default:Date.now()
-    },
-    dueOn:{
-      type:String,
-      default:Date.now()
-    },
-    start:{
-      type:Date,
-      default:Date.now()
-    },
-    end:{
-      type:Date,
-      default:Date.now()
-    },
-    default:null
-  },
-  courseSelected:{
-    trainingType:{
-      trainingType:String,
-      required:true
-    },
-    courseName:{
-      type:String,
-      required:true
-    },
-    paymentType:{
-      type:String,
-      required:true
-    },
-    default:null
-  },
-  trainingSessions:{
-    id:mongoose.Schema.Types.ObjectId,
-    schedualedTime:{
-      type:Date,
-      requried:true
-    },
-    status:{
-      type:String,
-      required:true,
-    },
-    deliveryMethod:{
-      type:String,
-      required:true
-    },
-    deliveryLocation:{
-      type:String,
-      required:true
-    },
-    attendanceType:{
-      type:String,
-      required:true
-    },
-    TCRequired:{
-      type:String,
-      required:true
-    }
-  },
-  default:null
+  }
 });
 
 module.exports = Employee = mongoose.model("employee",EmployeeSchema);
-addEmployee = function(newEmployee,callback){
+
+module.exports.addEmployee = function(newEmployee,callback){
   newEmployee.save(callback);
+}
+
+module.exports.getEmployeeById = function(id, callback){
+  Employee.findById(id,callback);
+}
+
+module.exports.updateEmployeeById = function(id,updatedEmployee,callback){
+  query = {_id:id};
+  Employee.updateOne(query,updatedEmployee,callback)
+}
+
+module.exports.deleteEmployeeById = function(id,callback){
+  query = {_id:id};
+  Employee.remove(query,callback)
 }
