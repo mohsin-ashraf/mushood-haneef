@@ -17,6 +17,22 @@ const EmployeeSchema = new Schema({
   joiningDate:{
     type:Date,
     default:Date.now()
+  },
+  salaryComponentType:{
+    type:String,
+    required:true
+  },
+  salaryDetails:{
+    type:String,
+    required:true
+  },
+  currency:{
+    type:String,
+    required:true
+  },
+  salary:{
+    type:String,
+    required:true,
   }
 });
 

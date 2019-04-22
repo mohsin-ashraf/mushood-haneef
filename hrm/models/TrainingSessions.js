@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const TrainingSchema = Schema({
   employeeId:{
     type:String,
-    requierd:true    
+    required:true    
   },
   schedualedTime:{
     type:Date,
@@ -32,7 +32,7 @@ const TrainingSchema = Schema({
   }
 });
 
-module.exports = Training = mongoose.model("employee",TrainingSchema);
+module.exports = Training = mongoose.model("TrainingSession",TrainingSchema);
 
 
 module.exports.addTrainingSession = function(training,callback){

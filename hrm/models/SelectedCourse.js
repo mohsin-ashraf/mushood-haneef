@@ -4,15 +4,23 @@ const Schema = mongoose.Schema;
 const CourseSchema = Schema({
   employeeId:{
     type:String,
+    required:true
+  },
+  name:{
+    type:String,
     requierd:true    
   },
-  trainingType:{
-    trainingType:String,
-    required:true
-  },
-  courseName:{
+  code:{
     type:String,
     required:true
+  },
+  coordinator:{
+    type:String,
+    required:true
+  },
+  trainer:{
+    type:String,
+    required:true,
   },
   paymentType:{
     type:String,
@@ -20,7 +28,7 @@ const CourseSchema = Schema({
   }
 });
 
-module.exports = Course = mongoose.model("Course",CourseSchema);
+module.exports = Course = mongoose.model("SelectedCourse",CourseSchema);
 
 module.exports.addCourse = function(course,callback){
   course.save(callback);

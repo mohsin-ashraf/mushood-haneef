@@ -1,5 +1,5 @@
 
-<div class="container pt-5">
+<div class="container my-5 pt-5">
   <h1>Training Sessions</h1>
   <table class="table mt-5">
   <thead>
@@ -17,20 +17,22 @@
     </tr>
   </thead>
   <tbody>
+    {{#each data}}
     <tr>
-      <td contenteditable="true">1</td>
-      <td contenteditable="true">413</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">1</td>
-      <td contenteditable="true">413</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-     <td contenteditable="true">fasdfsadfsadf</td>  
+      <td>{{_id}}</td>
+      <td>{{empName}}</td>
+      <td>{{cname}}</td>
+      <td>{{schedualedTime}}</td>
+      <td>{{status}}</td>
+      <td>{{deliveryMethod}}</td>
+      <td>{{deliveryLocation}}</td>
+      <td>{{attendanceType}}</td>
+      <td>{{TCRequired}}</td>  
       <td >
         <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
       </td>
     </tr>
+    {{/each}}
   </tbody>
 </table>
 

@@ -30,20 +30,22 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
-        <td>
-          <button class="btn btn-success"><i class="fas fa-plus"></i></button>
-        </td>
-      </tr>
+      {{#each review}}
+        <tr>
+          <td>{{_id}}</td>
+          <td>{{reviewer}}</td>
+          <td>{{employee}}</td>
+          <td>{{template}}</td>
+          <td>{{status}}</td>
+          <td>{{reviewDate}}</td>
+          <td>{{dueOn}}</td>
+          <td>{{start}}</td>
+          <td>{{end}}</td>
+          <td>
+            <a href="/reviews/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+          </td>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
   </div>
@@ -65,15 +67,17 @@
       </tr>
     </thead>
     <tbody>
+      {{#each feedback}}
       <tr>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
+        <td>{{_id}}</td>
+        <td>{{review}}</td>
+        <td>{{status}}</td>
+        <td>{{employeeName}}</td>
         <td >
-          <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
+          <a href="/feedback/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
   </div>

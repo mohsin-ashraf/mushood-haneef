@@ -1,0 +1,41 @@
+<div class="container my-5 pt-5">
+  <h1>Add Course</h1>
+  <form action="/course/add-course" class="form" method="POST">
+    {{!-- Course Code --}}
+    <div class="form-group">
+      <label for="coursecode">Course Code</label>
+      <input type="text" class="form-control" id="coursecode" name="code" placeholder="Course Code">
+    </div>
+
+    {{!-- Name --}}
+    <div class="form-group">
+      <label for="name">Course Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Course name">
+    </div>
+
+    {{!-- Coordinator --}}
+    <div class="form-group">
+      <label for="coodinator">Coordinator</label>
+      <input type="text" class="form-control" id="coordinator" name="coordinator" placeholder="Coordinator">
+    </div>
+
+    {{!-- Trainer --}}
+    <div class="form-group">
+      <label for="trainer">Trainer</label>
+      <input type="text" class="form-control" id="trainer" name="trainer" placeholder="Trainer">
+    </div>
+
+    {{!-- Payment Type --}}
+    <div class="form-group">
+      <label for="paymentType">Payment Type</label>
+      <input type="text" class="form-control" id="paymentType" name="paymentType" placeholder="Payment Type">
+    </div>
+
+    {{!-- Submit --}}
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

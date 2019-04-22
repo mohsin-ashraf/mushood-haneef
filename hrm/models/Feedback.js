@@ -1,4 +1,4 @@
-const mognoose = require("mongoose");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FeedbackSchema = Schema({
@@ -20,7 +20,7 @@ const FeedbackSchema = Schema({
   }
 });
 
-module.exports = Feedback = mognoose.model("feedback",FeedbackSchema);
+module.exports = Feedback = mongoose.model("feedback",FeedbackSchema);
 
 
 module.exports.addFeedback = function(feedback,callback){

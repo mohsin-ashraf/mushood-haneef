@@ -1,0 +1,57 @@
+<div class="container mt-5 pt-5">
+  <h1 class="text-center">Edit Employee</h1>
+  {{#each data}}
+    <form action="/update-employee/{{_id}}" method="POST" class="form">
+        <legend>
+        {{!-- Code --}}
+        <h1>{{data.salary}}</h1>
+        <div class="form-group">
+          <label for="code" id="code">Code</label>
+          <input type="number" name="code" value="{{code}}" placeholder="Enter employee code" class="form-control">
+        </div>  
+        {{!-- Name --}}
+        <div class="form-group">
+          <label for="name" id="name">Name</label>
+          <input type="text" class="form-control" value="{{name}}" name="name" placeholder="Enter employee name">
+        </div>
+        {{!-- Job Title --}}
+        <div class="form-group">
+          <label for="jobtitle" id="jobtitle">Job Title</label>
+          <input type="text" class="form-control" value="{{jobTitle}}" name="jobtitle" placeholder="Enter Job Title">
+        </div>
+        {{!-- Joining Date --}}
+        <div class="form-group">
+          <label for="joiningdate" id="joiningdate">Joining Date</label>
+          <br><small class="text-danger">Please add the joining date by your self the previous joining date is given below</small>
+          <p> {{joiningDate}} </p>
+          <input type="date" class="form-control" name="joiningdate" value="{{joiningDate}}" placeholder="Enter Joining Date">
+        </div>
+        {{!-- Salary Component Type --}}
+        <div class="form-group">
+          <label for="salaryComponentType" id="salaryComponentType">Salary Component Type</label>
+          <input type="text" class="form-control" value="{{salaryComponentType}}" name="salaryComponentType" id="salaryComponentType" placeholder="Salary Component Type">
+        </div>
+        {{!-- Salary Details --}}
+        <div class="form-group">
+          <label for="salaryDetails" id="salaryDetials">Salary Details</label>
+          <input type="text" class="form-control" name="salaryDetails" value="{{salaryDetails}}" id="salaryDetails" placeholder="Salary Details">
+        </div>
+        {{!-- Currency --}}
+        <div class="form-group">
+          <label for="currency" id="currency">Currency</label>
+          <input type="text" class="form-control" name="currency" id="currency" value="{{currency}}" placeholder="Currency">
+        </div>
+        {{!-- Salary --}}
+        <div class="form-group">
+          <label for="salary" id="salary">Salary</label>
+          <input type="number" class="form-control" name="salary" value="{{salary}}" id="salary" placeholder="Salary">
+        </div>
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <button type="submit" class="btn btn-block btn-primary">Update</button>
+          </div>
+        </div>
+        </legend>
+      </form>
+  {{/each}}
+</div>

@@ -1,0 +1,97 @@
+<div class="container my-5 pt-5">
+  <h1>Assign a course to <span class="text-primary">{{employee.name}}</span></h1>
+  <form action="/course/assign-course/{{id}}" method="POST">
+    {{!-- Course Code --}}
+    <div class="form-group">
+      <label for="coursecode">Course Code</label>
+      <select name="code" class="form-control" id="code">
+        {{#each data}}
+          <option value="{{code}}">{{code}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    {{!-- Name --}}
+    <div class="form-group">
+      <label for="name">Course Name</label>
+      <select name="name" id="name" class="form-control">
+        {{#each data}}
+          <option value="{{name}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    {{!-- Coordinator --}}
+    <div class="form-group">
+      <label for="coodinator">Coordinator</label>
+      <select name="coordinator" id="coordinator" class="form-control">
+        {{#each data}}
+          <option value="{{coordinator}}">{{coordinator}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    {{!-- Trainer --}}
+    <div class="form-group">
+      <label for="trainer">Trainer</label>
+      <select name="trainer" id="trainer" class="form-control">
+        {{#each data}}
+          <option value="{{trainer}}">{{trainer}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    {{!-- Payment Type --}}
+    <div class="form-group">
+      <label for="paymentType">Payment Type</label>
+      <input type="text" class="form-control" id="paymentType" name="paymentType" placeholder="Payment Type">
+    </div>
+
+    {{!-- Schedualed Time --}}
+    <div class="form-group">
+      <label for="schedualedTime">Schedule</label>
+      <input type="date" class="form-control" id="schedualedTime" name="schedualedTime" placeholder="Enter the Scheduale">
+    </div>
+
+    {{!-- Status --}}
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" class="form-control" id="status" name="status" placeholder="Status">
+    </div>
+
+    {{!-- Delivery Method --}}
+    <div class="form-group">
+      <label for="deliveryMethod">Delivery Method</label>
+      <input type="text" class="form-control" id="deliveryMethod" name="deliveryMethod" placeholder="Lecture Delivery Method">
+    </div>
+
+    {{!-- Delivery  Location --}}
+    <div class="form-group">
+      <label for="deliveryLocation">Delivery Location</label>
+      <input type="text" class="form-control" id="deliveryLocation" name="deliveryLocation" placeholder="Lecture delivery Location">
+    </div>
+
+    {{!-- Attendance Type --}}
+    <div class="form-group">
+      <label for="attendanceType">Attendance Type</label>
+      <input type="text" class="form-control" id="attendanceType" name="attendanceType" placeholder="Attendance Type">
+    </div>
+
+    {{!-- TC - Required --}}
+    <div class="form-group">
+      <label for="TCRequired">T.C Required</label>
+      <select type="text" class="form-control" id="TCRequired" name="TCRequired" placeholder="TC Required">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+      {{!-- EMPLOYEE ID HIDDEN FIELD --}}
+      <input type="text" value="{{id}}" name="employeeId" style="display:none">
+    {{!-- Submit --}}
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

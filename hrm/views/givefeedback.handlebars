@@ -1,0 +1,27 @@
+<div class="container my-5 pt-5">
+  <h1 class="py-3">
+    Dear <span class="text-primary">{{name}}</span> give feedback
+  </h1>
+  <form action="/feedback/give-feedback/{{_id}}"  method="POST" class="form">
+    {{!-- Review --}}
+    <div class="form-group">
+      <label for="review" class="label">Review</label>
+      <input type="text" class="form-control" id="review" name="review" placeholder="Enter the review" >
+    </div>
+
+    {{!-- Status --}}
+    <div class="form-group">
+      <label for="status" class="label">Status</label>
+      <input type="text" class="form-control" id="status" name="status" placeholder="Enter the status">
+    </div>
+
+    <input type="text" name="employeeName" style="display:none" value="{{name}}">
+    <input type="text" name="employeeId" style="display:none" value="{{_id}}">
+
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

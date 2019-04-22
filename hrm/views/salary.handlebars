@@ -1,13 +1,13 @@
 <div class="container mt-5 pt-5">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Salary Component Type</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Salary Components</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Pay Grades</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -21,20 +21,20 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Code</th>
         <th>Name</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
+      {{#each data}}
       <tr>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
+        <td >{{_id}}</td>
+        <td >{{name}}</td>
         <td>
-          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+          <a href="/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
   </div>
@@ -49,20 +49,24 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Code</th>
         <th>Name</th>
-        <th>Actions</th>
+        <th>Salary Component Type</th>
+        <th>Details</th>
+        <th>Options</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
+      {{#each data}}
+        <tr>
+        <td>{{_id}}</td>
+        <td>{{name}}</td>
+        <td>{{salaryComponentType}}</td>
+        <td>{{salaryDetails}}</td>
         <td >
-          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+          <a href="/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
   </div>
@@ -77,20 +81,24 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Code</th>
         <th>Name</th>
+        <th>Currency</th>
+        <th>Salary</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
+      {{#each data}}
       <tr>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
+        <td contenteditable="true">{{_id}}</td>
+        <td contenteditable="true">{{name}}</td>
+        <td contenteditable="true">{{currency}}</td>
+        <td contenteditable="true">{{salary}}</td>
         <td >
-          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+          <a href="/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
   </div>

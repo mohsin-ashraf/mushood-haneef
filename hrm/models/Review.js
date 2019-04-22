@@ -10,6 +10,10 @@ const ReviewSchema = Schema({
     type:String,
     required:true
   },
+  employee:{
+    type:String,
+    requierd:true
+  },
   template:{
     type:String,
     required:true
@@ -23,7 +27,7 @@ const ReviewSchema = Schema({
     default:Date.now()
   },
   dueOn:{
-    type:String,
+    type:Date,
     default:Date.now()
   },
   start:{

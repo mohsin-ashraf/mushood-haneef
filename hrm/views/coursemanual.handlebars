@@ -1,6 +1,9 @@
 <div class="container mt-5 pt-5">
   <div class="row">
-    <div class="col-md-3 offset-md-9">
+    <div class="col-md-3">
+      <a href="/course/add-course" class="btn btn-success">Add Course</a>
+    </div>
+    <div class="col-md-3 offset-md-6">
       <input type="text" class="form-control" id="search-bar" placeholder="Search">
     </div>
   </div>
@@ -17,16 +20,18 @@
     </tr>
   </thead>
   <tbody>
+    {{#each data}}
     <tr>
-      <td contenteditable="true">1</td>
-      <td contenteditable="true">413</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">sdfhakdfh</td>
+      <td>{{code}}</td>
+      <td>{{name}}</td>
+      <td>{{coordinator}}</td>
+      <td>{{trainer}}</td>
+      <td>{{paymentType}}</td>
       <td >
-        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+        <a href="/course/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
       </td>
     </tr>
+    {{/each}}
   </tbody>
 </table>
 

@@ -10,21 +10,85 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Code</th>
         <th>Name</th>
+        <th>Code</th>
+        <th>Job Title</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
+      {{#each data}}
       <tr>
-        <td contenteditable="true">1</td>
-        <td contenteditable="true">413</td>
-        <td contenteditable="true">fasdfsadfsadf</td>
-        <td >
-          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-          <a href="/specific-jobs" class="btn btn-primary"><i class="fas fa-user"></i></a>
+        <td> {{_id}} </td>
+        <td>{{name}}</td>
+        <td>{{code}}</td>
+        <td>{{jobTitle}}</td>
+        <td>
+          <a href="/delete/{{_id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+          <a href="/specific-jobs/{{jobTitle}}" class="btn btn-primary"><i class="fas fa-user"></i></a>
+          <a href="/update-employee/{{_id}}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+          <a href="/job-desc/{{jobTitle}}" class="btn btn-secondary"><i class="fas fa-file-invoice"></i></a>
+          <a href="/reviews/give-review/{{_id}}" class="btn btn-dark">Give Review</a>
+          <a href="/feedback/give-feedback/{{_id}}" class="btn btn-success">Give feedback</a>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
+
+  <br><br>
+  <h1>Add New Employee</h1>
+  <div class="row my-5">
+    <div class="col-md-8 offset-md-2 card-body bg-light">
+      <form action="/add-new-employee" method="POST" class="form">
+        <legend>
+        {{!-- Code --}}
+        <div class="form-group">
+          <label for="code" id="code">Code</label>
+          <input type="number" name="code" placeholder="Enter employee code" class="form-control">
+        </div>  
+        {{!-- Name --}}
+        <div class="form-group">
+          <label for="name" id="name">Name</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter employee name">
+        </div>
+        {{!-- Job Title --}}
+        <div class="form-group">
+          <label for="jobtitle" id="jobtitle">Job Title</label>
+          <input type="text" class="form-control" name="jobtitle" placeholder="Enter Job Title">
+        </div>
+        {{!-- Joining Date --}}
+        <div class="form-group">
+          <label for="joiningdate" id="joiningdate">Joining Date</label>
+          <input type="date" class="form-control" name="joiningdate" placeholder="Enter Joining Date">
+        </div>
+        {{!-- Salary Component Type --}}
+        <div class="form-group">
+          <label for="salaryComponentType" id="salaryComponentType">Salary Component Type</label>
+          <input type="text" class="form-control" name="salaryComponentType" id="salaryComponentType" placeholder="Salary Component Type">
+        </div>
+        {{!-- Salary Details --}}
+        <div class="form-group">
+          <label for="salaryDetails" id="salaryDetials">Salary Details</label>
+          <input type="text" class="form-control" name="salaryDetails" id="salaryDetails" placeholder="Salary Details">
+        </div>
+        {{!-- Currency --}}
+        <div class="form-group">
+          <label for="currency" id="currency">Currency</label>
+          <input type="text" class="form-control" name="currency" id="currency" placeholder="Currency">
+        </div>
+        {{!-- Salary --}}
+        <div class="form-group">
+          <label for="salary" id="salary">Salary</label>
+          <input type="number" class="form-control" name="salary" id="salary" placeholder="Salary">
+        </div>
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <button type="submit" class="btn btn-block btn-primary">Submit</button>
+          </div>
+        </div>
+        </legend>
+      </form>
+    </div>
+  </div>
 </div>

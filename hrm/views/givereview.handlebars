@@ -1,0 +1,52 @@
+<div class="container my-5 pt-5">
+  <h1>Give review about <b class="text-primary">{{name}}</b></h1>
+   <form action="/reviews/givereview/{{_id}}" method="POST" class="form">
+    {{!-- Reviewer name --}}
+    <div class="form-group">
+      <label for="name">Reviewer Name</label>
+      <input type="text" class="form-control" id="name" placeholder='Enter reviewer name' name="reviewer">
+    </div>
+  <input type="text" value="{{name}}" name="employee" style="display:none">
+    {{!-- Template --}}
+    <div class="form-group">
+      <label for="template">Template</label>
+      <input type="text" class="form-control" id="template" placeholder="Enter the template" name="template">
+    </div>
+
+    {{!-- Status --}}
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" class="form-control" id="status" placeholder="Enter status" name="status">
+    </div>
+
+      {{!-- reviewDate --}}
+      <div class="form-group">
+        <label for="reviewDate">Review Date</label>
+        <input type="date" class="form-control" placeholder="Enter review Date" name="reviewDate" id="reviewDate">
+      </div>
+
+      {{!-- dueOn --}}
+      <div class="form-group">
+        <label for="dueOn">Due On</label>
+        <input type="date" class="form-control" id="dueOn" name="dueOne" placeholder="Enter Due On Date">
+      </div>
+
+      {{!-- Start --}}
+      <div class="form-group">
+        <label for="start">Start</label>
+        <input type="date" class="form-control" name="start" placeholder="Enter start date" id="start">
+      </div>
+
+      {{!-- end --}}
+      <div class="form-group">
+        <label for="end">End</label>
+        <input type="date" class="form-control" id="end" name="end" placeholder="Enter end date">
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <button class="btn btn-block btn-primary">Submit</button>
+        </div>
+      </div>
+  </form>
+</div>

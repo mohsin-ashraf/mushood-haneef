@@ -6,22 +6,24 @@
       <th>Code</th>
       <th>Name</th>
       <th>Trainer</th>
-      <th>Student</th>
+      <th>Coordinator</th>
       <th>Payment Type</th>
       <th>Options</th>
     </tr>
   </thead>
   <tbody>
+    {{#each data}}
     <tr>
-      <td contenteditable="true">1</td>
-      <td contenteditable="true">413</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
-      <td contenteditable="true">fasdfsadfsadf</td>
+      <td>{{code}}</td>
+      <td>{{name}}</td>
+      <td>{{trainer}}</td>
+      <td>{{coordinator}}</td>
+      <td>{{paymentType}}</td>
       <td >
-        <a href="/training-sessions" class="btn btn-success"><i class="fas fa-user-graduate"></i></a>
+        <a href="/training-sessions/{{employeeId}}/{{name}}" class="btn btn-success"><i class="fas fa-user-graduate"></i></a>
       </td>
     </tr>
+    {{/each}}
   </tbody>
 </table>
 
