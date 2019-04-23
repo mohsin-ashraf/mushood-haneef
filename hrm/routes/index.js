@@ -108,7 +108,7 @@ router.post("/add-new-employee",(req,res)=>{
   res.redirect("/")
 });
 
-router.get("/job-description",(req,res)=>{
+router.get("/job-description/:jobTitle",(req,res)=>{
   res.render("job-description")
 })
 
