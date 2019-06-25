@@ -2,7 +2,7 @@ import requests
 import lxml.html
 
 
-url = "https://www.tripadvisor.com.au/Restaurant_Review-g255060-d7374953-Reviews-Oliver_Brown_Belgian_Chocolate_Cafe-Sydney_New_South_Wales.html#REVIEWS"
+url = "https://www.tripadvisor.com/AttractionProductReview-g32482-d11445987-Healdsburg_Wine_Tasting_and_Food_Pairing_Guided_Walking_Tour-Healdsburg_Sonoma_Coun.html"
 
 html = requests.get(url).text
 tree = lxml.html.fromstring(html)
